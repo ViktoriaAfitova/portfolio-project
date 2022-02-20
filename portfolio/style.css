@@ -209,3 +209,39 @@ h4 {
     line-height: 36px;
     text-align: center;
 }
+#portfolio {
+    padding-top: 65px;
+}
+.portfolio__btns {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 60px;
+}
+.btn__transparent {
+    width: 220px;
+    height: 55px;
+    border: 2px solid var(--color-gold);
+    background-color: var(--color-black);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+    text-align: center;
+    color: var(--color-gold);
+    cursor: pointer;
+}
+.btn__transparent:hover {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+}
+.active,
+.btn__transparent:hover {
+    background-color: var(--color-gold);
+    color: var(--color-black);
+}
+.portfolio-item__imgs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
