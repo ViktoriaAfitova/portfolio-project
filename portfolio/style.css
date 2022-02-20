@@ -90,3 +90,94 @@ nav {
 .switch-item__lang:hover {
     color: var(--color-gold);
 }
+/* #hero {
+    width: 100%;
+    height: 910px;
+    background-image: url('./assets/img/header-bg.jpg');
+    background-position: center -90px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    max-width: 1440px;
+}
+.hero-container {
+    position: relative;
+    height: 100%;
+    background-color: var(--color-black);
+    margin-bottom: 50px;
+    z-index: -10;
+}
+.hero-content {
+    width: 485px;
+    position: absolute;
+    top: 200px;
+    left: 150px;
+}
+.hero-title {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: var(--font1);
+    line-height: 120px;
+    color: var(--color-white);
+    margin-bottom: -10px;
+}
+.hero-text {
+    margin-bottom: 25px;
+}
+.btn__gold {
+    width: 220px;
+    height: 55px;
+    border: none;
+    background-color: var(--color-gold);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+    color: var(--color-black);
+    cursor: pointer;
+}
+.btn__gold:hover {
+    color: var(--color-white);
+} */
+
+.hero {
+	padding: 181px 0 330px 80px;
+  background-image: url('./assets/img/header-bg.jpg');
+  background-position: center -90px;
+  background-repeat: no-repeat;
+}
+
+.hero__content {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+    margin: -70px 0px 0px 75px;
+}
+.hero__title {
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: var(--font1);
+    line-height: 120px;
+    color: var(--color-white);
+    margin-bottom: 0px;
+}
+.hero__description {
+	max-width: 470px;
+    margin-top: 10px;
+	font-size: var(--font3);
+	line-height: 40px;
+}
+.btn__gold {
+    width: 220px;
+    height: 55px;
+    border: none;
+    background-color: var(--color-gold);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 40px;
+    color: var(--color-black);
+    cursor: pointer;
+}
+.btn__gold:hover {
+    color: var(--color-white);
+}
