@@ -67,10 +67,11 @@ header {
     margin: 10px 20px 0px 20px;
     transition: 0.3s;
     cursor: pointer;
+    /* filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(315deg) brightness(106%) contrast(101%); */
 }
-.sun-icon:hover {
+/* .sun-icon:hover {
     filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
-}
+} */
 nav {
     margin-left: auto;
 }
@@ -972,4 +973,38 @@ textarea {
     .year {
         margin-left: 50px;
     }
+}
+
+/*theme*/
+.sun-icon {
+    transition: 0.3s;
+    width: 40.82px;
+    height: 40px;
+    cursor: pointer;
+    margin: 0px 20px 20px 28px;
+    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(315deg) brightness(106%) contrast(101%);
+}
+.active__icon,
+.sun-icon:hover {
+    filter: invert(26%) sepia(15%) saturate(638%) hue-rotate(7deg) brightness(92%) contrast(87%);
+}
+.light-theme {
+    background-color: var(--color-white);
+    color: var(--color-black);
+}
+.light-theme:hover {
+    color: var(--color-black);
+}
+.footer-dark-theme {
+    background-color: var(--color-black);
+    color: var(--color-white);
+}
+.color__white {
+    color: var(--color-white);
+}
+.color__black {
+    color: var(--color-black);
+}
+.title-light-theme {
+    background-image: linear-gradient(to top, #fff 39px, #000 39px, #000 41px, #fff 41px);
 }

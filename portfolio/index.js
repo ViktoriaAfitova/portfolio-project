@@ -176,3 +176,72 @@ langButtons.forEach(lang => {
 
 getTranslate(DEFAULT_LANGUAGE);
 
+/*theme*/
+let moon = document.querySelector('.moon-icon');
+let sun = document.querySelector('.sun-icon');
+
+sun.addEventListener('click', () => {
+    if (localStorage.getItem('theme')) {
+        localStorage.removeItem('theme');
+    } else {
+        localStorage.setItem('theme', 'light-theme');
+    }
+    addLightClass();
+})
+
+function addLightClass() {
+    const MUTABLE_VARIABLES =  [
+        'body',
+        '.skill-item',
+        '.section-title',
+        '.title-container',
+        '.price-text',
+        '.btn__transparent'];
+    const TITLE_CONTAINERS = ['.title-container'];
+    const WHITE_VARIABLES = ['.hero__description'];
+    const BLACK_VARIABLES = ['h4', 'h3', '.price-description'];
+
+    if (localStorage.getItem('theme')) {
+        MUTABLE_VARIABLES.forEach((item) => {
+            const elem = document.querySelectorAll(item);
+            elem.forEach(el => el.classList.add('light-theme'));
+        })
+        WHITE_VARIABLES.forEach((item) => {
+            const elem = document.querySelector(item);
+            elem.classList.add('color__white');
+        })
+        BLACK_VARIABLES.forEach((itemList) => {
+            const elements = document.querySelectorAll(itemList);
+            elements.forEach(elem => elem.classList.add('color__black'));
+        })
+        TITLE_CONTAINERS.forEach((itemsTitle) => {
+            const titles = document.querySelectorAll(itemsTitle);
+            titles.forEach(e => e.classList.add('title-light-theme'));
+        })
+
+        document.querySelector('.footer').classList.add('footer-dark-theme');
+        moon.src = 'assets/svg/moon.svg';
+    } else {
+        document.querySelector('.hero__description').classList.remove('color__white');
+
+        const el = document.querySelectorAll(['body', '.skill-item', '.section-title', '.price-text', '.btn__transparent']);
+        el.forEach(elem => elem.classList.remove('light-theme'));
+
+        const elem = document.querySelectorAll(['h4', 'h3', '.price-description']);
+        elem.forEach(elem => elem.classList.remove('color__black'));
+
+        const title = document.querySelectorAll(['.title-container']);
+        title.forEach(e => e.classList.remove('title-light-theme'));
+
+        moon.src = 'assets/svg/sun.svg';
+    }
+}
+addLightClass();
+
+let iconBtns = document.querySelectorAll('.theme-icon');
+iconBtns.forEach(icon => {
+    icon.addEventListener('click', function() {
+        iconBtns.forEach(currentIcon => currentIcon.classList.remove('active__icon'));
+        this.classList.add('active__icon');
+    })
+})
