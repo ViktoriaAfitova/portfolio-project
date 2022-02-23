@@ -245,3 +245,130 @@ iconBtns.forEach(icon => {
         this.classList.add('active__icon');
     })
 })
+
+/*video*/
+// const player = document.querySelector('.video-player');
+// const video = player.querySelector('.viewer');
+// const mainBtn = player.querySelector('.toggle__btn');
+
+// function togglePlay() {
+//     const method = video.paused ? 'play' : 'pause';
+//     video[method]();
+//     mainBtn.classList.toggle('active');
+// }
+
+// video.addEventListener('click', togglePlay);
+// mainBtn.addEventListener('click', togglePlay);
+
+
+const videoPlayer = document.querySelector('.video-player-video');
+const videoPlayerCover = document.querySelector('.video-player-cover');
+const progressBar = document.querySelector('.video-progressbar');
+const currTime = document.querySelector('.video-controls-time');
+const durationTime = document.querySelector('.video-controls-duration');
+const videoPlayerButton = document.querySelector('.video-player-button');
+const playButton = document.querySelector('.video-controls-play');
+const volumeButton = document.querySelector('.video-controls-volume');
+const volumeScale = document.querySelector('.volume-progressbar');
+const titleColor = '#BDAE82';
+const videoCotrolsColor = '#C8C8C8';
+
+
+const videoActive = () => {
+    if (videoPlayer.paused) {
+        videoPlayer.play();
+        playButton.classList.add("video-controls-pause");
+        videoPlayerButton.classList.add("hidden");
+        videoPlayerCover.classList.add("hidden");
+    } else {
+        videoPlayer.pause();
+        playButton.classList.remove("video-controls-pause");
+        videoPlayerButton.classList.remove("hidden");
+        videoPlayerButton.classList.add("open-video");
+    }
+    if (durationTime.innerHTML == '00:00') {
+        durationTime.innerHTML = videoTime(videoPlayer.duration);
+    }
+}
+
+playButton.addEventListener('click', videoActive);
+videoPlayerButton.addEventListener('click', videoActive);
+videoPlayer.addEventListener('click', videoActive);
+
+const videoTime = (time) => {
+    time = Math.floor(time);
+    let minutes = Math.floor(time / 60);
+    let seconds = Math.floor(time - minutes * 60);
+    let minutesValue = minutes;
+    var secondsValue = seconds;
+    if (minutes < 10) {
+        minutesValue = `0${minutes}`;
+    }
+    if (seconds < 10) {
+        secondsValue = `0${seconds}`;
+    }
+    return `${minutesValue}:${secondsValue}`;
+}
+
+const videoProgress = () => {
+    let progress = (Math.floor(videoPlayer.currentTime) / (Math.floor(videoPlayer.duration) / 100));
+    progressBar.value = progress;
+    currTime.innerHTML = videoTime(videoPlayer.currentTime);
+    progressBar.style.background = `linear-gradient(to right, ${titleColor} 0%, ${titleColor} ${progress}%, ${videoCotrolsColor} ${progress}%, ${videoCotrolsColor} 100%)`;
+    if (videoPlayer.currentTime === videoPlayer.duration) {
+        playButton.classList.remove("video-controls-pause");
+    }
+}
+
+videoPlayer.addEventListener('timeupdate', videoProgress);
+
+progressBar.addEventListener("input", function () {
+    let newTime = videoPlayer.duration * (progressBar.value / 100);
+    videoPlayer.currentTime = newTime;
+})
+
+
+const videoChangeVolume = () => {
+    let volume = volumeScale.value / 100;
+    videoPlayer.volume = volume;
+    if (videoPlayer.volume == 0) {
+        volumeButton.classList.add("video-controls-mute");
+    } else {
+        volumeButton.classList.remove("video-controls-mute");
+    }
+}
+const videoMute = () => {
+    if (videoPlayer.volume == 0) {
+        videoPlayer.volume = volumeScale.value / 100;
+        volumeButton.classList.remove("video-controls-mute");
+    } else {
+        videoPlayer.volume = 0;
+        volumeButton.classList.add("video-controls-mute");
+    }
+}
+volumeButton.addEventListener('click', videoMute);
+volumeScale.addEventListener('change', videoChangeVolume);
+
+volumeScale.addEventListener('input', function () {
+    const value = this.value;
+    console.log(value)
+    this.style.background = `linear-gradient(to right, ${titleColor} 0%, ${titleColor} ${value}%, ${videoCotrolsColor} ${value}%, ${videoCotrolsColor} 100%)`
+})
+
+const videoWrap = document.querySelector('.video-wrap');
+const videoFullscreenButton = document.querySelector('.video-controls-fullscreen');
+
+const openFullscreen = () => {
+    if (document.fullscreenElement === null) {
+        videoWrap.requestFullscreen();
+    } else {
+        document.exitFullscreen();
+    }
+}
+
+videoFullscreenButton.addEventListener('click', openFullscreen);
+
+document.addEventListener("fullscreenchange", () => {
+    videoFullscreenButton.classList.toggle("active");
+});
+
