@@ -1,3 +1,5 @@
+document.addEventListener("DOMContentLoaded", function () {
+
 /*burger*/
 const toggleBtn = document.querySelector('.toggle');
 const nav = document.querySelector('.nav');
@@ -95,10 +97,10 @@ const i18Obj = {
         'price-description-3-span-5': 'Make up, visage, hairstyle',
         'order': 'Order shooting',
         'contact-me': 'Contact me',
-        'email': 'E-mail',
-        'phone': 'Phone',
-        'message': 'Message',
-        'send-message': 'Send message'
+        'send-message': 'Send message',
+        'E-mail': 'E-mail',
+        'Phone': 'Phone',
+        'Message': 'Message',
     },
     'ru': {
         'skills': 'Навыки',
@@ -141,10 +143,10 @@ const i18Obj = {
         'price-description-3-span-5': 'Макияж, визаж, прическа',
         'order': 'Заказать съемку',
         'contact-me': 'Свяжитесь со мной',
-        'e-mail': 'Электронная почта',
-        'phone': 'Телефон',
-        'message': 'Сообщение',
-        'send-message': 'Отправить'
+        'send-message': 'Отправить',
+        'E-mail': 'Электронный ящик',
+        'Phone': 'Номер телефона',
+        'Message': 'Сообщение',
     }
 }
 const en = document.querySelector('.en');
@@ -164,7 +166,36 @@ function getTranslate(lang) {
     list.forEach((item) => {
         item.textContent = obj[item.getAttribute('data-i18')];
     })
+
+    const dataTranslate = document.querySelectorAll('[data-i18]');
+        dataTranslate.forEach((element) => {
+            let a = element.dataset.i18;
+            if (element.placeholder) {
+                element.placeholder = element.innerHTML = i18Obj[`${lang}`][`${a}`];
+                element.textContent = '';
+            } else {
+                element.innerHTML = i18Obj[`${lang}`][`${a}`];
+            }
+        });
+        language = lang;
 }
+
+let language = 'en';
+let themeColor = 'dark';
+
+const setLocalStorage = () => {
+    localStorage.setItem('language', language);
+}
+window.addEventListener('beforeunload', setLocalStorage)
+
+const getLocalStorage = () => {
+    if (localStorage.getItem('language')) {
+        const language = localStorage.getItem('language');
+        getTranslate(language);
+    }
+}
+window.addEventListener('load', getLocalStorage);
+
 
 let langButtons = document.querySelectorAll('.switch-item__lang');
 langButtons.forEach(lang => {
@@ -220,6 +251,8 @@ function addLightClass() {
         })
 
         document.querySelector('.footer').classList.add('footer-dark-theme');
+        document.querySelector('header').classList.add('footer-dark-theme');
+        document.querySelector('.hero').classList.add('footer-dark-theme');
         moon.src = 'assets/svg/moon.svg';
     } else {
         document.querySelector('.hero__description').classList.remove('color__white');
@@ -247,20 +280,6 @@ iconBtns.forEach(icon => {
 })
 
 /*video*/
-// const player = document.querySelector('.video-player');
-// const video = player.querySelector('.viewer');
-// const mainBtn = player.querySelector('.toggle__btn');
-
-// function togglePlay() {
-//     const method = video.paused ? 'play' : 'pause';
-//     video[method]();
-//     mainBtn.classList.toggle('active');
-// }
-
-// video.addEventListener('click', togglePlay);
-// mainBtn.addEventListener('click', togglePlay);
-
-
 const videoPlayer = document.querySelector('.video-player-video');
 const videoPlayerCover = document.querySelector('.video-player-cover');
 const progressBar = document.querySelector('.video-progressbar');
@@ -272,7 +291,6 @@ const volumeButton = document.querySelector('.video-controls-volume');
 const volumeScale = document.querySelector('.volume-progressbar');
 const titleColor = '#BDAE82';
 const videoCotrolsColor = '#C8C8C8';
-
 
 const videoActive = () => {
     if (videoPlayer.paused) {
@@ -327,7 +345,6 @@ progressBar.addEventListener("input", function () {
     videoPlayer.currentTime = newTime;
 })
 
-
 const videoChangeVolume = () => {
     let volume = volumeScale.value / 100;
     videoPlayer.volume = volume;
@@ -337,6 +354,7 @@ const videoChangeVolume = () => {
         volumeButton.classList.remove("video-controls-mute");
     }
 }
+
 const videoMute = () => {
     if (videoPlayer.volume == 0) {
         videoPlayer.volume = volumeScale.value / 100;
@@ -346,6 +364,7 @@ const videoMute = () => {
         volumeButton.classList.add("video-controls-mute");
     }
 }
+
 volumeButton.addEventListener('click', videoMute);
 volumeScale.addEventListener('change', videoChangeVolume);
 
@@ -372,3 +391,4 @@ document.addEventListener("fullscreenchange", () => {
     videoFullscreenButton.classList.toggle("active");
 });
 
+})
