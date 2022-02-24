@@ -295,14 +295,14 @@ const videoCotrolsColor = '#C8C8C8';
 const videoActive = () => {
     if (videoPlayer.paused) {
         videoPlayer.play();
-        playButton.classList.add("video-controls-pause");
-        videoPlayerButton.classList.add("hidden");
-        videoPlayerCover.classList.add("hidden");
+        playButton.classList.add('video-controls-pause');
+        videoPlayerButton.classList.add('hidden');
+        videoPlayerCover.classList.add('hidden');
     } else {
         videoPlayer.pause();
-        playButton.classList.remove("video-controls-pause");
-        videoPlayerButton.classList.remove("hidden");
-        videoPlayerButton.classList.add("open-video");
+        playButton.classList.remove('video-controls-pause');
+        videoPlayerButton.classList.remove('hidden');
+        videoPlayerButton.classList.add('open-video');
     }
     if (durationTime.innerHTML == '00:00') {
         durationTime.innerHTML = videoTime(videoPlayer.duration);
@@ -334,13 +334,13 @@ const videoProgress = () => {
     currTime.innerHTML = videoTime(videoPlayer.currentTime);
     progressBar.style.background = `linear-gradient(to right, ${titleColor} 0%, ${titleColor} ${progress}%, ${videoCotrolsColor} ${progress}%, ${videoCotrolsColor} 100%)`;
     if (videoPlayer.currentTime === videoPlayer.duration) {
-        playButton.classList.remove("video-controls-pause");
+        playButton.classList.remove('video-controls-pause');
     }
 }
 
 videoPlayer.addEventListener('timeupdate', videoProgress);
 
-progressBar.addEventListener("input", function () {
+progressBar.addEventListener('input', function () {
     let newTime = videoPlayer.duration * (progressBar.value / 100);
     videoPlayer.currentTime = newTime;
 })
@@ -349,19 +349,19 @@ const videoChangeVolume = () => {
     let volume = volumeScale.value / 100;
     videoPlayer.volume = volume;
     if (videoPlayer.volume == 0) {
-        volumeButton.classList.add("video-controls-mute");
+        volumeButton.classList.add('video-controls-mute');
     } else {
-        volumeButton.classList.remove("video-controls-mute");
+        volumeButton.classList.remove('video-controls-mute');
     }
 }
 
 const videoMute = () => {
     if (videoPlayer.volume == 0) {
         videoPlayer.volume = volumeScale.value / 100;
-        volumeButton.classList.remove("video-controls-mute");
+        volumeButton.classList.remove('video-controls-mute');
     } else {
         videoPlayer.volume = 0;
-        volumeButton.classList.add("video-controls-mute");
+        volumeButton.classList.add('video-controls-mute');
     }
 }
 
@@ -370,8 +370,7 @@ volumeScale.addEventListener('change', videoChangeVolume);
 
 volumeScale.addEventListener('input', function () {
     const value = this.value;
-    console.log(value)
-    this.style.background = `linear-gradient(to right, ${titleColor} 0%, ${titleColor} ${value}%, ${videoCotrolsColor} ${value}%, ${videoCotrolsColor} 100%)`
+    this.style.background = `linear-gradient(to right, ${titleColor} 0%, ${titleColor} ${value}%, ${videoCotrolsColor} ${value}%, ${videoCotrolsColor} 100%)`;
 })
 
 const videoWrap = document.querySelector('.video-wrap');
@@ -380,15 +379,17 @@ const videoFullscreenButton = document.querySelector('.video-controls-fullscreen
 const openFullscreen = () => {
     if (document.fullscreenElement === null) {
         videoWrap.requestFullscreen();
+        videoFullscreenButton.classList.remove('active');
     } else {
         document.exitFullscreen();
+        videoFullscreenButton.classList.add('active');
     }
 }
 
 videoFullscreenButton.addEventListener('click', openFullscreen);
 
-document.addEventListener("fullscreenchange", () => {
-    videoFullscreenButton.classList.toggle("active");
+document.addEventListener('fullscreenchange', () => {
+    videoFullscreenButton.classList.toggle('active');
 });
 
 })

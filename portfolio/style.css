@@ -813,6 +813,8 @@ textarea::placeholder {
     .video-player-button {
         width: 75px;
         height: 75px;
+        top: 30%;
+        left: 50%;
         background-size: contain;
     }
     #price {
@@ -824,6 +826,7 @@ textarea::placeholder {
     .price-list {
         display: flex;
         flex-direction: column;
+        align-content: center;
         margin-bottom: 20px;
     }
     .price-item {
@@ -899,6 +902,21 @@ textarea::placeholder {
     }
 }
 @media screen and (max-width: 450px) {
+    .video-player-button {
+        width: 50px;
+        height: 50px;
+        top: 25%;
+        left: 50%;
+    }
+    .video-player-controls {
+        display: flex;
+        justify-content: space-between;
+        padding: 0px;
+    }
+    .video-controls-icon {
+        width: 30px;
+        height: 26px;
+    }
     .video-controls-time {
       width: 40px;
       font-size: 14px;
@@ -981,7 +999,7 @@ textarea::placeholder {
     }
     .portfolio__btns {
         flex-direction: column;
-        width: 225px;
+        width: 160px;
         margin: 0 auto;
         margin-bottom: 40px;
     }
