@@ -1,23 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
 
 /*burger*/
-const toggleBtn = document.querySelector('.toggle');
+const toggleBtn = document.querySelector('.burger__btn');
 const nav = document.querySelector('.nav');
 const navList = document.querySelector('.nav-list');
 const navItems = document.querySelectorAll('.nav-item');
 
 function switchMenu() {
-    toggleBtn.classList.toggle('collapsed');
-    nav.classList.toggle('collapsed');
-    navList.classList.toggle('collapsed');
+    toggleBtn.classList.toggle('open');
+    nav.classList.toggle('open');
+    navList.classList.toggle('open');
 }
 toggleBtn.addEventListener('click', switchMenu);
 
 function closeMenu() {
     setTimeout(() => {
-        toggleBtn.classList.remove('collapsed');
-        nav.classList.remove('collapsed');
-        navList.classList.remove('collapsed');
+        toggleBtn.classList.remove('open');
+        nav.classList.remove('open');
+        navList.classList.remove('open');
     }, 1000);
 }
 navItems.forEach(el => el.addEventListener('click', closeMenu));
@@ -197,7 +197,7 @@ const getLocalStorage = () => {
 window.addEventListener('load', getLocalStorage);
 
 
-let langButtons = document.querySelectorAll('.switch-item__lang');
+let langButtons = document.querySelectorAll('.switch-item');
 langButtons.forEach(lang => {
     lang.addEventListener('click', function() {
         langButtons.forEach(currentLang => currentLang.classList.remove('active__lang'));
